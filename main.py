@@ -6,9 +6,9 @@ import traceback
 def main():
     load_dotenv()
 
-    bingo = Bingo()
-
     while True:
+        bingo = Bingo()
+
         try:
             bingo.login()
             bingo.run()
