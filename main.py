@@ -16,8 +16,8 @@ def main():
             break
         except:
             print(traceback.format_exc())
-
-    bingo.quit()
+        finally:
+            bingo.quit()
 
 
 if __name__ == "__main__":
