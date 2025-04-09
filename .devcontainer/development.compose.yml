@@ -1,0 +1,4 @@
+services:
+  python:
+    image: python:3.13
+    command: /bin/sh -c "while sleep 1000; do :; done"

@@ -1,0 +1,10 @@
+services:
+  python:
+    build: .
+    environment:
+      SELENIUM_REMOTE_URL: http://chrome:4444
+    
+  chrome:
+    image: selenium/standalone-chrome:130.0
+    ports:
+      - 7900:7900
