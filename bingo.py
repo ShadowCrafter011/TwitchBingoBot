@@ -34,6 +34,14 @@ class Bingo:
                 win_button.click()
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 pass
+            
+            try:
+                self.driver.switch_to.default_content()
+                cancel_bits_button = self.driver.find_element(By.XPATH, "//button[@data-test-selector='test_selector_cancel_button']")
+                cancel_bits_button.click()
+                self.switch_to_inner_iframe()
+            except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
+                pass
 
     def login(self):
         self.driver.get("https://twitch.tv")
@@ -47,6 +55,9 @@ class Bingo:
         self.driver.get(os.getenv("BINGO_URL"))
         self.driver.refresh()
 
+        self.switch_to_inner_iframe()
+
+    def switch_to_inner_iframe(self):
         iframe = self.driver.find_element(By.TAG_NAME, "iframe")
         self.driver.switch_to.frame(iframe)
 
