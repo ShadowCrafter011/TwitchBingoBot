@@ -10,12 +10,14 @@ import os
 class Bingo:
     def __init__(self):
         options = ChromeOptions()
-        options.add_argument("--window-size=300,800")
+        options.add_argument("--window-size=400,1000")
         self.driver: Remote = Remote(os.getenv("SELENIUM_REMOTE_URL"), options=options)
 
     def run(self):
         while True:
-            sleep(1)
+            sleep(10)
+
+            self.switch_to_inner_iframe()
 
             try:
                 join_button = self.driver.find_element(By.CLASS_NAME, "splash-screen__join-button")
@@ -39,7 +41,6 @@ class Bingo:
                 self.driver.switch_to.default_content()
                 cancel_bits_button = self.driver.find_element(By.XPATH, "//button[@data-test-selector='test_selector_cancel_button']")
                 cancel_bits_button.click()
-                self.switch_to_inner_iframe()
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 pass
 
@@ -54,8 +55,6 @@ class Bingo:
 
         self.driver.get(os.getenv("BINGO_URL"))
         self.driver.refresh()
-
-        self.switch_to_inner_iframe()
 
     def switch_to_inner_iframe(self):
         iframe = self.driver.find_element(By.TAG_NAME, "iframe")
