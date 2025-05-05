@@ -13,6 +13,7 @@ def main():
             bingo.login()
             bingo.run()
         except KeyboardInterrupt:
+            print(f"\nGot {bingo.bingos} bingo{"s" if bingo.bingos != 1 else ""}")
             break
         except:
             print(traceback.format_exc())

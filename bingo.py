@@ -12,10 +12,11 @@ class Bingo:
         options = ChromeOptions()
         options.add_argument("--window-size=400,1000")
         self.driver: Remote = Remote(os.getenv("SELENIUM_REMOTE_URL"), options=options)
+        self.bingos = 0
 
     def run(self):
         while True:
-            sleep(10)
+            sleep(1)
 
             self.switch_to_inner_iframe()
 
@@ -26,14 +27,17 @@ class Bingo:
                 pass
 
             try:
-                for number in self.driver.find_elements(By.CLASS_NAME, "card-cell__number"):
-                    number.click()
+                for number in self.driver.find_elements(By.CLASS_NAME, "card-cell"):
+                    if len(number.find_elements(By.CLASS_NAME, "card-cell__bg.card-cell__bg--called")) > 0:
+                        number.click()
+                        sleep(.5)
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 pass
 
             try:
-                win_button = self.driver.find_element(By.CLASS_NAME, "card-bingo-button")
+                win_button = self.driver.find_element(By.CLASS_NAME, "card-bingo-button.card-bingo-button__bingo-available")
                 win_button.click()
+                self.bingos += 1
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 pass
             
