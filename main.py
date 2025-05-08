@@ -6,8 +6,10 @@ import traceback
 def main():
     load_dotenv()
 
+    bingos = 0
+
     while True:
-        bingo = Bingo()
+        bingo = Bingo(bingos)
 
         try:
             bingo.login()
@@ -18,6 +20,7 @@ def main():
         except:
             print(traceback.format_exc())
         finally:
+            bingos = bingo.bingos
             bingo.quit()
 
 

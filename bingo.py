@@ -8,15 +8,18 @@ import os
 
 
 class Bingo:
-    def __init__(self):
+    def __init__(self, bingos, debug=False):
         options = ChromeOptions()
         options.add_argument("--window-size=400,1000")
         self.driver: Remote = Remote(os.getenv("SELENIUM_REMOTE_URL"), options=options)
-        self.bingos = 0
+        self.bingos = bingos
+        self.delay = 5
+        self.restart_timer = 10 * 60
+        self.debug = debug
 
     def run(self):
-        while True:
-            sleep(1)
+        for _ in range(int(self.restart_timer / self.delay)):
+            sleep(self.delay)
 
             self.switch_to_inner_iframe()
 
@@ -51,13 +54,20 @@ class Bingo:
     def login(self):
         self.driver.get("https://twitch.tv")
 
-        cookies = os.getenv("TWITCH_COOKIES").split(";")
+        if self.debug:
+            cookies = "TWITCH_COOKIES_DEBUG"
+            url = "BINGO_URL_DEBUG"
+        else:
+            cookies = "TWITCH_COOKIES"
+            url = "BINGO_URL"
+
+        cookies = os.getenv(cookies).split(";")
         cookies = [cookie.strip().split("=") for cookie in cookies]
         
         for key, value in cookies:
             self.driver.add_cookie({"name": key, "value": value})
 
-        self.driver.get(os.getenv("BINGO_URL"))
+        self.driver.get(os.getenv(url))
         self.driver.refresh()
 
     def switch_to_inner_iframe(self):
