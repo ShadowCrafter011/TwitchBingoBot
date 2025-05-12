@@ -41,6 +41,7 @@ class Bingo:
                 win_button = self.driver.find_element(By.CLASS_NAME, "card-bingo-button.card-bingo-button__bingo-available")
                 win_button.click()
                 self.bingos += 1
+                print(f"We got a BINGO! {self.bingos} gotten so far")
             except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
                 pass
             

@@ -18,7 +18,8 @@ def main():
             print(f"\nGot {bingo.bingos} bingo{"s" if bingo.bingos != 1 else ""}")
             break
         except:
-            print(traceback.format_exc())
+            # print(traceback.format_exc())
+            pass
         finally:
             bingos = bingo.bingos
             bingo.quit()
