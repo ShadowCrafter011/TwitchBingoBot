@@ -9,7 +9,7 @@ def main():
     bingos = 0
 
     while True:
-        bingo = Bingo(bingos, debug=True)
+        bingo = Bingo(bingos)
 
         try:
             bingo.login()
