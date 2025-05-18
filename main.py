@@ -9,7 +9,7 @@ def main():
     bingos = 0
 
     while True:
-        bingo = Bingo(bingos)
+        bingo = Bingo(bingos, debug=True)
 
         try:
             bingo.login()
@@ -18,7 +18,7 @@ def main():
             print(f"\nGot {bingo.bingos} bingo{"s" if bingo.bingos != 1 else ""}")
             break
         except:
-            # print(traceback.format_exc())
+            print(traceback.format_exc())
             pass
         finally:
             bingos = bingo.bingos
