@@ -91,7 +91,7 @@ class Bingo:
                             print(card[x], end=" ")
                         if (x + 1) % 5 == 0:
                             print("")
-            except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException):
+            except (NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException, IndexError):
                 pass                    
             
             # Join the bingo game
