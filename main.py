@@ -1,3 +1,4 @@
+from selenium.common.exceptions import WebDriverException
 from dotenv import load_dotenv
 from bingo import Bingo
 import traceback
@@ -17,6 +18,9 @@ def main():
         except KeyboardInterrupt:
             print(f"\nGot {bingo.bingos} bingo{"s" if bingo.bingos != 1 else ""}")
             break
+        # Do nothing if tab crashes
+        except WebDriverException:
+            pass
         except:
             print(traceback.format_exc())
             pass
