@@ -131,11 +131,11 @@ class Bingo:
         self.driver.get("https://twitch.tv")
 
         if self.debug:
-            cookies = "TWITCH_COOKIES_DEBUG"
-            url = "BINGO_URL_DEBUG"
+            cookies = "DEBUG_TWITCH_COOKIES"
+            url = "DEBUG_BINGO_URL"
         else:
             cookies = "TWITCH_COOKIES"
-            url = "BINGO_URL"
+            url = f"BINGO_URL_{os.getenv("BINGO_CHANNEL")}"
 
         cookies = os.getenv(cookies).split(";")
         cookies = [cookie.strip().split("=") for cookie in cookies]

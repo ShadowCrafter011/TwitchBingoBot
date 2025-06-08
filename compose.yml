@@ -9,4 +9,4 @@ services:
   chrome:
     image: selenium/standalone-chrome:130.0
     ports:
-      - 7900:7900
+      - 7000:7900
