@@ -13,7 +13,7 @@ def main():
     print("Available bingo channels are:")
     for key in os.environ.keys():
         if key.startswith("BINGO_URL"):
-            print(key.replace("BINGO_URL_", ""))
+            print(key.replace("BINGO_URL_", "").lower().capitalize())
     
     channel = input("Which channel would you like to play bingo for? ")
     os.environ["BINGO_CHANNEL"] = channel.upper()
