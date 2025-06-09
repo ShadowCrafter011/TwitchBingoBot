@@ -8,7 +8,7 @@ import os
 def main():
     load_dotenv()
 
-    bingos = 0
+    bingos = {}
 
     print("Available bingo channels are:")
     for key in os.environ.keys():
@@ -16,7 +16,7 @@ def main():
             print(key.replace("BINGO_URL_", "").lower().capitalize())
     
     channel = input("Which channel would you like to play bingo for? ")
-    os.environ["BINGO_CHANNEL"] = channel.upper()
+    os.environ["BINGO_CHANNELS"] = channel.upper()
 
     while True:
         bingo = Bingo(bingos)
@@ -25,7 +25,10 @@ def main():
             bingo.login()
             bingo.run()
         except KeyboardInterrupt:
-            print(f"\nGot {bingo.bingos} bingo{"s" if bingo.bingos != 1 else ""}")
+            print("\n")
+            for channel, bingos in bingos.items():
+                channel = channel.lower().capitalize()
+                print(f"Got {bingos} bingo{"s" if bingos != 1 else ""} ({channel})")
             break
         # Do nothing if tab crashes
         except WebDriverException:
