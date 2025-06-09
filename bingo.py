@@ -23,7 +23,7 @@ class Bingo:
 
         for channel in self.channels:
             if not channel in self.bingos:
-                self.bingos[channel] = 0
+                self.bingos[channel.lower().capitalize()] = 0
 
     def run(self):
         for _ in range(int(self.restart_timer / self.delay)):
