@@ -26,9 +26,9 @@ def main():
             bingo.run()
         except KeyboardInterrupt:
             print("\n")
-            for channel, bingos in bingos.items():
+            for channel, bingo in bingos.items():
                 channel = channel.lower().capitalize()
-                print(f"Got {bingos} bingo{"s" if bingos != 1 else ""} ({channel})")
+                print(f"Got {bingo} bingo{"s" if bingo != 1 else ""} ({channel})")
             break
         # Do nothing if tab crashes
         except WebDriverException:
